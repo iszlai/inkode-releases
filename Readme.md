@@ -1,59 +1,88 @@
-# inkode releases
+# inkode
 
-Binary releases for [`ik`](https://inkode.co) — the automated codebase quality analyzer built for the post-AI era.
+**Code quality scanning for the post-AI era.**
+
+The `ik` CLI runs 15 checks against your codebase — secrets, vulnerable dependencies, test coverage, complexity, duplication, coupling, and more — and gives you a 0–100 health score in under 60 seconds.
+
+→ **[inkode.co](https://inkode.co)** · [How It Works](https://inkode.co/how-it-works.html) · [Services](https://inkode.co/services.html)
+
+---
 
 ## Install
 
-**One line:**
-
-```sh
+```bash
 curl -fsSL https://inkode.co/install.sh | sh
 ```
 
-This downloads the latest `ik` binary for your OS and architecture and installs it to `/usr/local/bin/ik`.
+Detects your OS and architecture, downloads the correct binary, and installs to `/usr/local/bin/ik`.
 
-**Or download manually** from the [releases page](https://github.com/iszlai/inkode-releases/releases) and place the binary somewhere on your `PATH`.
+**Supported platforms:** macOS (arm64, amd64) · Linux (arm64, amd64)
 
-## Platforms
+**Manual download:** grab the archive for your platform from the [latest release](https://github.com/iszlai/inkode/releases/latest), extract, and move `ik` to somewhere on your `$PATH`.
 
-| OS      | Architecture |
-|---------|-------------|
-| macOS   | arm64 (Apple Silicon) |
-| macOS   | amd64 (Intel) |
-| Linux   | amd64 |
-| Linux   | arm64 |
+---
 
 ## Quick start
 
-```sh
-# Initialize a project (creates .ik.yaml)
-ik init
-
-# Run all checks against the current repo
-ik run
-
-# Open the full report in your browser
-ik review
+```bash
+cd your-project
+ik init        # detects languages, writes .ik.yaml
+ik run         # runs all checks, prints score
 ```
+
+Output:
+
+```
+inkode · your-project
+Running 15 checks...
+
+✓ Line Count      no issues    12ms
+⚠ Secret Scanning 2 findings   1.1s
+⚠ Test Presence   5 findings   8ms
+✓ Dep Audit       no issues    890ms
+...
+
+Score  72 / 100   grade C
+
+Report  .ik/brief.html
+```
+
+---
 
 ## What it checks
 
-`ik` runs 8 automated checks concurrently and produces a scored report:
-
 | Check | What it finds |
-|-------|--------------|
-| `secrets` | Hardcoded credentials and API keys |
-| `dep-audit` | Known CVEs in dependencies |
-| `test-presence` | Directories with no test coverage |
-| `duplication` | Copy-pasted code blocks |
-| `coupling` | Hidden architectural coupling via co-change patterns |
-| `complexity` | Functions with high cyclomatic complexity |
-| `line-count` | Oversized files |
-| `hotspot` | High-churn files most likely to introduce bugs |
+|-------|---------------|
+| Secret Scanning | Hardcoded API keys, tokens, passwords |
+| Dependency Audit | Known CVEs in Go, JS, Python dependencies |
+| Test Presence | Directories with code but no tests |
+| Complexity | Functions with high cyclomatic complexity |
+| Line Count | Oversized files |
+| Hotspots | Files that change most frequently |
+| Coupling | Files that always change together |
+| Duplication | Copy-pasted code blocks |
+| Error Handling | Unchecked errors, bare excepts, empty catches |
+| Dead Code | Unused functions, exports, variables |
+| TODO Density | High concentrations of deferred work |
+| Magic Numbers | Hardcoded literals instead of named constants |
+| Import Graph | Circular imports, god packages |
+| Infrastructure | Dockerfile, K8s, Terraform misconfigurations |
+| Scripts | Shell script vulnerabilities via ShellCheck |
 
-Results are graded A–F. Reports can be shared as a public teaser URL or reviewed in full locally.
+Full details at **[inkode.co/how-it-works.html](https://inkode.co/how-it-works.html)**
 
-## Source & docs
+---
 
-Full source, documentation, and self-hosting instructions live in the main repository:
-[github.com/iszlai/inkode](https://github.com/iszlai/inkode)
+## Expert review
+
+The CLI shows you where the problems are. Our engineers tell you how to fix them — prioritized by impact, delivered as a structured remediation roadmap.
+
+**[Book a review →](https://inkode.co/services.html)**
+
+---
+
+## Links
+
+- **Website:** [inkode.co](https://inkode.co)
+- **Case Studies:** [inkode.co/case-studies.html](https://inkode.co/case-studies.html)
+- **Issues:** [github.com/iszlai/inkode/issues](https://github.com/iszlai/inkode/issues)
